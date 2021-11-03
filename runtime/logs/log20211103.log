@@ -1,0 +1,2 @@
+[INFO][article.go:69]2021/11/03 15:38:08 [err.key: %s, err.message: %s state 状态只允许0或1]
+[INFO][article.go:69]2021/11/03 15:41:24 [state 状态只允许0或1]
