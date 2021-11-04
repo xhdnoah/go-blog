@@ -27,13 +27,13 @@ func GetTagTotal(maps interface{}) (count int) {
 
 func ExistTagByID(id int) bool {
 	var tag Tag
-	db.Select("id").Where("id = ?", id).First(&tag)
+	db.Select("id").Where("id = ? AND deleted_on = ? ", id, 0).First(&tag)
 	return tag.ID > 0
 }
 
 func ExistTagByName(name string) bool {
 	var tag Tag
-	db.Select("id").Where("name = ?", name).First(&tag)
+	db.Select("id").Where("name = ? AND deleted_on = ? ", name, 0).First(&tag)
 	return tag.ID > 0
 }
 
@@ -52,7 +52,7 @@ func DeleteTag(id int) bool {
 }
 
 func EditTag(id int, data interface{}) bool {
-	db.Model(&Tag{}).Where("id = ?", id).Update(&Tag{})
+	db.Model(&Tag{}).Where("id = ? AND deleted_on = ? ", id, 0).Update(&Tag{})
 	return true
 }
 

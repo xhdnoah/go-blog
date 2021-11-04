@@ -33,7 +33,7 @@ func (article *Article) BeforeUpdate(scope *gorm.Scope) error {
 
 func ExistArticleByID(id int) bool {
 	var article Article
-	db.Select("id").Where("id = ?", id).First(&article)
+	db.Select("id").Where("id = ? AND deleted_on = ? ", id, 0).First(&article)
 	return article.ID > 0
 }
 
@@ -48,13 +48,13 @@ func GetArticles(pageNum int, pageSize int, maps interface{}) (articles []Articl
 }
 
 func GetArticle(id int) (article Article) {
-	db.Where("id = ?", id).First(&article)
+	db.Where("id = ? AND deleted_on = ? ", id, 0).First(&article)
 	db.Model(&article).Related(&article.Tag)
 	return
 }
 
 func EditArticle(id int, data interface{}) bool {
-	db.Model(&Article{}).Where("id = ?", id).Updates(data)
+	db.Model(&Article{}).Where("id = ? AND deleted_on = ? ", id, 0).Updates(data)
 	return true
 }
 
