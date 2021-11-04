@@ -1,5 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 
+USE blog;
+
 DROP TABLE IF EXISTS `blog_article`;
 CREATE TABLE `blog_article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
